@@ -14,7 +14,7 @@ Resources:
         Variables:
           kmsEncryptedKeys: 'YOUR_KEY'
       Handler: lambda_function.lambda_handler
-      MemorySize: 128
+      MemorySize: 256
       Policies:
         KMSDecryptPolicy:
           KeyId: !Ref KMSKeyId

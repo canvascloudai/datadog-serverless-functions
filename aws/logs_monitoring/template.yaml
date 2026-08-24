@@ -1,1 +1,6 @@
-PLACEHOLDER
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Pushes logs, metrics and traces from AWS to Datadog.
+Parameters:
+  MemorySize:
+    Type: Number
+    Default: 2048

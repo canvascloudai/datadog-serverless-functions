@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CWM field test 7 — Datadog Forwarder-like AWS::Lambda::Function memory capacity.
+Parameters:
+  MemorySize:
+    Type: Number
+    Default: 2048
+    MinValue: 128
+    MaxValue: 3008
+    Description: Memory size for the Datadog Forwarder Lambda function
+Resources:
+  Forwarder:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Pushes logs, metrics and traces from AWS to Datadog.
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.14
+      Architectures:
+        - arm64
+      MemorySize: !Ref MemorySize
+      Timeout: 120
+      Role: !GetAtt ForwarderRole.Arn
+      Code:
+        ZipFile: " "
+  ForwarderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
